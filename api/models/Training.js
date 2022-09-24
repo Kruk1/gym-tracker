@@ -28,7 +28,7 @@ const trainingSchema = mongoose.Schema({
             ]
         }
     ],
-    createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+    createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true},
     lastUpdate: 
     {
         type: Date,

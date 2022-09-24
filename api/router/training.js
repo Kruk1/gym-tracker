@@ -25,12 +25,18 @@ router.post('/CreateTraining', catchAsync(async (req, res) =>
     }
     let createTrainingInfo = req.body
     const user = await User.findOne({}).select('_id')
-    console.log(user)
-    createTrainingInfo.createdBy = user
+    createTrainingInfo.createdBy = user._id
     createTrainingInfo.days = daysPrepare
     console.log(createTrainingInfo)
     await Training.create(createTrainingInfo)
     res.status(200).send('Training has been created!')
 }))
+
+router.get('/GetTraining', async (req, res) =>
+{
+    const user = await User.findOne({}).select('_id')
+    const training = await Training.find({createdBy: user._id})
+    res.json(training)
+})
 
 module.exports = router
