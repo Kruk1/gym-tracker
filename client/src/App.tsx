@@ -1,24 +1,12 @@
-import './App.css';
-import {useState, useEffect} from 'react';
-const axios = require('axios')
+import './css/App.css';
+import './components/login'
+import LoginForm from './components/login';
 
 function App() {
-    const [api, setApi] = useState('')
-
-    useEffect(() =>
-    {
-        async function apiGet()
-        {
-            const req = await axios.get('/api')
-            setApi(req.data.elo)
-        }
-        apiGet()
-    }, [])
-
     return (
-        <div className="App">
-        {api}
-        </div>
+        <>
+            <LoginForm />
+        </>
     );
 }
 
