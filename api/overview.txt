@@ -1,0 +1,6 @@
+GET /GetTraining Get training object
+POST /CreateTraining Create training object
+DELETE /DeleteTraining Delete training object
+PATCH /UpdateTraining Update training object
+POST /CreateExercise Create exercise for training object
+POST /login Login to app

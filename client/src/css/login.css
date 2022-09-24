@@ -1,0 +1,67 @@
+.log-in-center
+{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.log-in-form
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.log-in-input
+{
+    background-color: transparent;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    border: 1px solid #555; 
+    border-radius: 5px;
+    padding: 10px 20px;
+    outline: none;
+    margin-bottom: 10px;
+    width: 270px;
+    transition: .2s;
+}
+
+.log-in-input:focus
+{
+    border: 1px solid rgb(92, 157, 179);
+}
+
+.log-in-form label
+{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    background-color: #101010;
+    transform: translateY(50%);
+    width: min-content;
+}
+
+.icon-user
+{
+    font-size: 100px;
+}
+
+.log-in-form button
+{
+    border: 1px solid #555;
+    background-color: transparent;
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    transition: .2s;
+}
+
+.log-in-form button:hover
+{
+    border: 1px solid rgb(92, 157, 179);
+}
