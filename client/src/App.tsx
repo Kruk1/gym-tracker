@@ -1,11 +1,17 @@
 import './css/App.css';
-import './components/login'
 import LoginForm from './components/login';
+import {Route, Routes} from "react-router-dom"
+import {AuthProvider} from './context/AuthContext';
 
 function App() {
     return (
         <>
-            <LoginForm />
+            <AuthProvider>
+                <Routes>
+                    <Route path='/' element={<LoginForm />} />
+                    <Route path='/plans' />
+                </Routes>
+            </AuthProvider>
         </>
     );
 }

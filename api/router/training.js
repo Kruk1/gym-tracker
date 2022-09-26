@@ -17,11 +17,11 @@ const catchAsync = (fn) =>
 router.use((req, res, next) =>
 {
     const token = req.cookies.access_token
-    if(!token) throw MyError('You are not authenticated!', 401)
+    if(!token) throw new MyError('You are not authenticated!', 401, true)
 
     jwt.verify(token, jwttoken, (err, user) =>
     {
-        if(err) throw MyError('Token is not valid!', 403)
+        if(err) throw new MyError('Token is not valid!', 403, true)
         req.user = user
         next()
     })
@@ -40,26 +40,23 @@ router.post('/CreateTraining', catchAsync(async (req, res) =>
 
     }
     let createTrainingInfo = req.body
-    const user = await User.findOne({}).select('_id')
-    createTrainingInfo.createdBy = user._id
+    createTrainingInfo.createdBy = req.user.id
     createTrainingInfo.days = daysPrepare
     console.log(createTrainingInfo)
     await Training.create(createTrainingInfo)
     res.status(200).send('Training has been created!')
 }))
 
-router.get('/GetTraining', async (req, res) =>
+router.get('/GetTraining', catchAsync(async (req, res) =>
 {
-    const user = await User.findOne({}).select('_id')
-    const training = await Training.find({createdBy: user._id})
+    const training = await Training.find({createdBy: req.user.id})
     res.json(training)
-})
+}))
 
-router.patch('/UpdateTraining', async (req, res) =>
+router.patch('/UpdateTraining', catchAsync(async (req, res) =>
 {
-    const user = await User.findOne({}).select('_id')
-    const training = await Training.find({createdBy: user._id})
+    const training = await Training.find({createdBy: req.user.id})
     res.status(200).send('Training has been updated!')
-})
+}))
 
 module.exports = router

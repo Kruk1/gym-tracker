@@ -17,16 +17,16 @@ const catchAsync = (fn) =>
 router.post('/login', catchAsync(async (req, res) => 
 {
     const user = await User.findOne({login: req.body.login})
-    if(!user) throw new MyError('User not found!', 404)
+    if(!user) throw new MyError('User not found!', 404, true)
 
     const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
-    if(!isPasswordCorrect) throw new MyError('Password Incorrect', 400)
+    if(!isPasswordCorrect) throw new MyError('Password Incorrect', 400, true)
 
     const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, jwttoken)
 
     const {password, isAdmin, ...otherParameters} = user._doc
 
-    res.cookie('access_token', token, { httpOnly: true }).status(200).send({...otherParameters})
+    res.cookie('access_token', token, { httpOnly: true }).status(200).json(otherParameters)
 }))
 
 module.exports = router
