@@ -1,7 +1,16 @@
 import React, { useState, useContext } from 'react'
 
-const AuthContext = React.createContext(undefined)
-const AuthSetContext = React.createContext(function(info: undefined){})
+type authInfo = 
+{
+    login: string,
+    id: string
+}
+
+const AuthContext = React.createContext<authInfo>({
+    login: '',
+    id:''
+})
+const AuthSetContext = React.createContext(function(info: authInfo){})
 
 export function useAuth()
 {
@@ -15,9 +24,12 @@ export function useSetAuth()
 
 export function AuthProvider({ children }: {children: React.ReactNode})
 {
-    const[auth, setAuth] = useState()
+    const[auth, setAuth] = useState({
+        login: '',
+        id: ''
+    })
 
-    function authChange(info: undefined)
+    function authChange(info: authInfo)
     {
         setAuth(info)
     }

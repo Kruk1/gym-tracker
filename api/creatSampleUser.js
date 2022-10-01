@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const salt = bcrypt.genSaltSync(10);
-const hash = bcrypt.hashSync("123", salt);
+const hash = bcrypt.hashSync("321", salt);
 const user = {
-    login: 'kruk',
+    login: 'dawid',
     password: hash,
     isAdmin: true
 }

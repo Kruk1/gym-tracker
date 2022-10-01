@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import '../css/login.css';
 import '../css/cleanStyle.css';
-import {useAuth,useSetAuth} from '../context/AuthContext'
 import axios from 'axios';
 
 function LoginForm() {
@@ -10,8 +9,10 @@ function LoginForm() {
         login: '',
         password: ''
     })
-    const setAuth = useSetAuth()
     const navigate = useNavigate()
+    const location = useLocation()
+    window.history.replaceState({}, document.title)
+    console.log(location)
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>)
     {
@@ -33,7 +34,6 @@ function LoginForm() {
         })
         if(res.status === 200)
         {
-            setAuth(res.data)
             navigate('/plans')
         }
     }
@@ -41,6 +41,7 @@ function LoginForm() {
     return (
         <main className="log-in-center">
             <form className='log-in-form' onSubmit={handleSubmit}>
+                {location.state && <div className="error">{location.state}</div>}
                 <i className="icon-user"></i>
                 <label htmlFor="text">Login</label>
                 <input type="text" name='login' value={login.login} onChange={handleChange} className="log-in-input" placeholder='login' autoComplete='off' />

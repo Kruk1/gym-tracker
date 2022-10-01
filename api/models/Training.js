@@ -16,6 +16,7 @@ const trainingSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    description: String,
     days: 
     [
         {
