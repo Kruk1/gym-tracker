@@ -38,10 +38,24 @@ router.get('/GetTraining', catchAsync(async (req, res) =>
     res.json(training)
 }))
 
+router.get('/GetTrainingDetails', catchAsync(async (req, res) =>
+{
+    const {id} = req.query
+    const training = await Training.findById(id)
+    res.json(training)
+}))
+
 router.patch('/UpdateTraining', catchAsync(async (req, res) =>
 {
     const training = await Training.find({createdBy: req.user.id})
     res.status(200).send('Training has been updated!')
+}))
+
+router.delete('/DeleteTraining', catchAsync(async (req, res) =>
+{
+    const {id} = req.query
+    await Training.findByIdAndDelete(id)
+    res.send('Deleted')
 }))
 
 module.exports = router

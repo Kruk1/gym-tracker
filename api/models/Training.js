@@ -14,22 +14,32 @@ const trainingSchema = mongoose.Schema({
     name: 
     {
         type: String,
-        required: true
+        required: [true, 'Name is required']
     },
     description: String,
     days: 
-    [
+    {
+        type:[
+            {
+                day: String,
+                exercises:
+                [
+                    {
+                        name: String,
+                        results: [Number]
+                    }
+                ]
+            }
+        ],
+        validate:
         {
-            day: String,
-            exercises:
-            [
-                {
-                    name: String,
-                    results: [Number]
-                }
-            ]
+            validator: function(arr)
+            {
+                return arr.length > 0
+            },
+            message: () => 'Days is required'
         }
-    ],
+    },
     createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true},
     lastUpdate: 
     {

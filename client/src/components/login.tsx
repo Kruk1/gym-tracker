@@ -12,7 +12,6 @@ function LoginForm() {
     const navigate = useNavigate()
     const location = useLocation()
     window.history.replaceState({}, document.title)
-    console.log(location)
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>)
     {

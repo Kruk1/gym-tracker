@@ -3,24 +3,6 @@ body
     font-family: 'Roboto', sans-serif;
 }
 
-.center
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.loading-spinner 
-{
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f3f3f3; 
-    border-top: 5px solid rgb(174, 93, 255); 
-    border-radius: 50%;
-    animation: spinner 1.5s linear infinite;
-}
-
 .gym-tracker-container
 {
     display: flex;
@@ -70,6 +52,7 @@ body
     background-color: #212121;
     border-radius: 5px;
     transition: .2s;
+    text-decoration: none;
 }
 
 .training:hover
@@ -82,6 +65,7 @@ body
 {
     font-size: 25px;
     letter-spacing: 2px;
+    color: white;
 }
 
 .training .icon-plus
@@ -101,13 +85,16 @@ body
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 700px;
-    height: 500px;
+    width: 500px;
+    height: 350px;
     border-radius: 10px;
+    padding: 25px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #323232;
+    animation: fade-in .5s forwards;
 }
 
 .backdrop
@@ -119,11 +106,172 @@ body
     opacity: 0.5;
 }
 
-@keyframes spinner {
+.form-container-create form 
+{
+    max-width: 680px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.name-input
+{
+    background-color: #212121;
+    border: 1px solid #101010;
+    padding: 7px 20px;
+    border-radius: 5px;
+    width: 260px;
+    outline: none;
+    color: white;
+}
+
+.name-input-container, .select-input-container, .textarea-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name-input-container
+{
+    margin-right: 10px;
+}
+
+.name-input-container label, .select-input-container label, .textarea-container label
+{
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+select
+{
+    outline: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+}
+
+select::-ms-expand
+{
+    display: none;
+}
+
+#select-input
+{
+    text-align: center;
+    min-width: 100px;
+    max-width: 150px;
+    border: 1px solid #101010;
+    border-radius: 0.25em;
+    padding: 0.25em 0;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+    color: #fff;
+    background-color: #212121;
+}
+
+.textarea-container
+{
+    margin-top: 10px;
+}
+
+#description-input
+{
+    width: 380px;
+    resize: none;
+    background-color: #212121;
+    color: white;
+    border: 1px solid #101010;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    padding: 5px 10px;
+}
+
+.form-container-create form button
+{
+    background-color: #212121;
+    border: 1px solid #101010;
+    color: white;
+    margin-top: 15px;
+    width: 125px;
+    line-height: 30px;
+    border-radius: 5px;
+    transition: .2s;
+}
+
+.form-container-create form button:hover
+{
+    cursor: pointer;
+    background-color: #434343;
+}
+
+.response-info
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #212121;
+    width: 300px;
+    min-height: 50px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    color: rgb(17, 255, 17);
+    margin-top: 10px;
+    border: 3px solid rgb(17, 255, 17);
+}
+
+@keyframes fade-in {
     0% {
-        transform: rotate(0deg);
+        opacity: 0;
     }
     100% {
-        transform: rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .form-container-create
+    {
+        width: 270px;
+    }
+
+    #description-input
+    {
+        width: 260px;
+    }
+
+    .name-input
+    {
+        width: 220px;
+    }
+
+    #select-input
+    {
+        width: 262px;
+        max-width: 280px;
+    }
+
+    .name-input-container
+    {
+        margin: 0;
+    }
+
+    .select-input-container
+    {
+        margin-top: 10px;
+    }
+
+    .training
+    {
+        width: 260px;
     }
 }

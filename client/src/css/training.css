@@ -1,0 +1,114 @@
+.training-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.training-container h1
+{
+    font-size: 40px;
+    margin: 30px 0 0 0;
+}
+
+.buttons
+{
+    margin-top: 20px;
+}
+
+.delete-btn, .update-btn, .back-btn
+{
+    border: 0;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    transition: .1s;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.delete-btn
+{
+    background-color: #a81414;
+}
+
+.update-btn
+{
+    background-color: #b900b9;
+}
+
+.back-btn
+{
+    background-color: #525252;
+}
+
+.delete-btn:hover
+{
+    background-color: #970303;
+}
+
+.update-btn:hover
+{
+    background-color: #a800a8;
+}
+
+.back-btn:hover
+{
+    background-color: #414141;
+}
+
+.days
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.day 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    padding: 25px;
+    background-color: #212121;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.day h2
+{
+    font-size: 25px;
+}
+
+.add-exercise
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    background-color: #323232;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.add-exercise .icon-plus
+{
+    font-size: 25px;
+}
+
+@media screen and (max-width: 380px) {
+    .buttons
+    {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .delete-btn
+    {
+        margin-top: 10px;
+    }
+}

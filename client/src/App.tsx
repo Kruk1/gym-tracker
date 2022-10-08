@@ -4,6 +4,7 @@ import {Route, Routes} from "react-router-dom"
 import {AuthProvider} from './context/AuthContext';
 import MainContent from './components/mainContent';
 import { CookiesProvider } from 'react-cookie';
+import Training from './components/training';
 
 function App() {
     return (
@@ -12,7 +13,10 @@ function App() {
                 <AuthProvider>
                     <Routes>
                         <Route path='/' element={<LoginForm />} />
-                        <Route path='/plans' element={<MainContent />}/>
+                        <Route path='/plans'>
+                            <Route index element={<MainContent />} />
+                            <Route path=':id' element={<Training />} />
+                        </Route>
                     </Routes>
                 </AuthProvider>
             </CookiesProvider>
