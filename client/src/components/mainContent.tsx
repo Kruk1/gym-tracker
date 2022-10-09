@@ -184,7 +184,7 @@ function MainContent() {
                                     <input type="text" name="name" className="name-input" placeholder="My gym training" onChange={handleChange} value={trainingCreateInfo.name}/>
                                 </div>
                                 <div className="select-input-container">
-                                    <label htmlFor="name">Days</label>
+                                    <label htmlFor="days">Days</label>
                                     <div className="custom-select">
                                         <select name="days" id="select-input" onChange={handleSelectChange} value={trainingCreateInfo.days}>
                                             <option>-</option>

@@ -58,4 +58,18 @@ router.delete('/DeleteTraining', catchAsync(async (req, res) =>
     res.send('Deleted')
 }))
 
+router.post('/CreateExercise', catchAsync(async (req, res) =>
+{
+    const training = await Training.findById(req.body.trainingId)
+    const day = training.days.find(day => day._id == req.body.idDay)
+    day.exercises.push(
+        {
+            name: req.body.name,
+            results: [req.body.results]
+        }
+    )
+    await training.save()
+    res.send('Created!')
+}))
+
 module.exports = router
