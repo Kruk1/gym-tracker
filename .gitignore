@@ -1,1 +1,4 @@
 /node_modules
+/api/config.json
+/api/node_modules
+/client/node_modules
