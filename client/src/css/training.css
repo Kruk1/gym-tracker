@@ -70,8 +70,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 250px;
-    padding: 25px;
+    width: 260px;
+    padding: 20px;
     background-color: #212121;
     margin: 5px;
     border-radius: 5px;
@@ -86,13 +86,105 @@
 {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 10px;
     background-color: #323232;
-    width: 100%;
-    height: 50px;
+    width: calc(100% - 30px);
+    height: 45px;
+    padding: 5px 15px;
     border-radius: 5px;
     transition: .2s;
+}
+
+.exercise-center
+{
+    justify-content: center;
+}
+
+.exercise h3
+{
+    width: 180px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.modal-exercise
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 800px;
+}
+
+.modal-exercise h4
+{
+    font-size: 45px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+.modal-exercise form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.modal-exercise form .form-result-container label
+{
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.modal-exercise form .form-result-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-exercise form button
+{
+    background-color: #212121;
+    border: 1px solid #101010;
+    color: white;
+    width: 75px;
+    line-height: 30px;
+    border-radius: 5px;
+    transition: .2s;
+    margin-top: 5px;
+}
+
+.modal-exercise form button:hover
+{
+    cursor: pointer;
+    background-color: #434343;
+}
+
+#number
+{
+    background-color: #212121;
+    border: 1px solid #101010;
+    padding: 7px 20px;
+    border-radius: 5px;
+    width: 150px;
+    outline: none;
+    color: white;
+}
+
+.progress-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.progress-container h5
+{
+    font-size: 30px;
+    color: rgb(72, 255, 72);
+    font-weight: 400;
 }
 
 .add-exercise
@@ -114,13 +206,13 @@
     color: rgb(72, 255, 72);
 }
 
-.add-exercise:hover
+.add-exercise:hover, .exercise:hover
 {
     cursor: pointer;
     background-color: #434343;
 }
 
-.modal-add-exercise
+.modal-add-exercise, .modal-exercise 
 {
     position: fixed;
     top: 50%;
@@ -201,5 +293,40 @@ input[type=number] {
     .delete-btn
     {
         margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .modal-exercise
+    {
+        width: 450px;
+    }
+
+    .modal-exercise h4
+    {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .training-input
+    {
+        width: 200px;
+    }
+
+    .modal-exercise
+    {
+        width: 250px;
+    }
+
+    .modal-exercise h4
+    {
+        font-size: 25px;
+        margin-bottom: 5px;
+    }
+
+    .progress-container h5
+    {
+        font-size: 20px;
     }
 }

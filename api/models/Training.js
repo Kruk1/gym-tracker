@@ -30,7 +30,8 @@ const trainingSchema = mongoose.Schema({
                             type: String,
                             required: [true, 'Name exercise is required']
                         },
-                        results: [Number]
+                        results: [Number],
+                        length: [String]
                     }
                 ]
             }
@@ -44,12 +45,7 @@ const trainingSchema = mongoose.Schema({
             message: () => 'Days is required'
         }
     },
-    createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true},
-    lastUpdate: 
-    {
-        type: Date,
-        default: new Date()
-    }
+    createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true}
 })
 
 const Training = mongoose.model('TrainingPlans', trainingSchema)

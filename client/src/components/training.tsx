@@ -147,7 +147,9 @@ function Training() {
             index: index + 1,
             showModal: showModal,
             getIdOfDay: getIdOfDay,
-            day: day
+            day: day,
+            setIsRendering: setIsRendering,
+            getTrainingInfo: getTrainingInfo
         }
         return (
             <Day props={dayProps} key={day._id}/>
@@ -178,7 +180,7 @@ function Training() {
                                 </div>
                                 <div className="number-input-container">
                                     <label htmlFor="results">Start value(must be a number)</label>
-                                    <input type="float" name='results' className='name-input training-input' onChange={handleChange}/>
+                                    <input type="number" step="any" name='results' className='name-input training-input' onChange={handleChange}/>
                                 </div>
                                 <input type="text" name='id' value={idDay} onChange={handleChange} hidden/>
                                 <button>Create exercise</button>

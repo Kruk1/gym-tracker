@@ -65,9 +65,21 @@ router.post('/CreateExercise', catchAsync(async (req, res) =>
     day.exercises.push(
         {
             name: req.body.name,
-            results: [req.body.results]
+            results: [req.body.results],
+            length: ['']
         }
     )
+    await training.save()
+    res.send('Created!')
+}))
+
+router.patch('/UpdateResults', catchAsync(async (req, res) =>
+{
+    const training = await Training.findById(req.body.idTraining)
+    const day = training.days.find(day => day._id == req.body.idDay)
+    const exercise = day.exercises.find(exercise => exercise._id == req.body.idExercise)
+    exercise.results.push(req.body.number)
+    exercise.length.push('')
     await training.save()
     res.send('Created!')
 }))

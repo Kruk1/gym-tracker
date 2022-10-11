@@ -1,23 +1,31 @@
-import '../css/cleanStyle.css';
-import '../css/loading.css'
+import '../css/cleanStyle.css'
+import {useState} from 'react'
+import Exercise from './exercise';
 
 function Day(props: any) {
 
+    const exercise = props.props.day.exercises.map((exercise: any) => 
+    {
+        exercise.setIsRendering = props.props.setIsRendering
+        exercise.idDay = props.props.day._id
+        exercise.getTrainingInfo = props.props.getTrainingInfo
+        return <Exercise props={exercise} key={exercise._id}/>
+    })
+
     return (
-        <div className="day">
-            <h2>Day {props.props.index}</h2>
-            {props.props.day.exercises.map((exercise: any) => 
+        <>
+            <div className="day">
+                <h2>Day {props.props.index}</h2>
+                {exercise}
+                <div className="add-exercise" onClick={(event: React.MouseEvent) =>
                 {
-                    return <div className="exercise">{exercise.name}</div>
-                })}
-            <div className="add-exercise" onClick={(event: React.MouseEvent) =>
-            {
-                props.props.showModal()
-                props.props.getIdOfDay(props.props.day)
-            }}>
-                <i className="icon-plus"></i>
+                    props.props.showModal()
+                    props.props.getIdOfDay(props.props.day)
+                }}>
+                    <i className="icon-plus"></i>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
