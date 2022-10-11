@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const methodOverride = require('method-override')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const flash = require('connect-flash')
@@ -17,7 +16,6 @@ app.use(express.static(path.resolve(__dirname, '../client/src')));
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(methodOverride('_method'))
 app.use(cookieParser())
 app.use(session(sessionOptions))
 app.use(flash())
@@ -32,5 +30,9 @@ app.use((err, req, res, next) =>
     console.log(err)
     res.status(err.status).json(err)
 })
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/src', 'index.html'));
+  });
 
 app.listen(PORT, () => console.log('Server started on port 5000 '))
