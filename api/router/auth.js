@@ -22,7 +22,7 @@ router.post('/login', catchAsync(async (req, res) =>
     const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
     if(!isPasswordCorrect) throw new MyError('Password Incorrect', 400, true)
 
-    const token = jwt.sign({id: user._id, isAdmin: user.isAdmin, login: user.login}, jwttoken)
+    const token = jwt.sign({id: user._id, isAdmin: user.isAdmin, login: user.login}, jwttoken || process.env.JWTTOKEN)
 
     const {password, isAdmin, ...otherParameters} = user._doc
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {mongo} = require('../config.json')
 
-mongoose.connect(mongo, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongo || process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!")
     })
