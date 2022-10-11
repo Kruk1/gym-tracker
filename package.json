@@ -1,5 +1,14 @@
 {
   "dependencies": {
     "react-flash-message": "^1.0.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node api/index.js",
+    "build": "cd client && npm install && npm run build",
+    "dev": "nodemon index.js"
+  },
+  "engines": {
+    "node": "16.15.0"
   }
 }
