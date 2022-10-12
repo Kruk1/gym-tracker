@@ -1,6 +1,5 @@
 const express = require('express')
 const verifyToken = require('../controllers/verifyToken')
-const User = require('../models/User')
 const router = express.Router()
 
 const catchAsync = (fn) =>
