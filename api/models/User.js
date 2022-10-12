@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const {mongo} = require('../config.json')
+require('dotenv').config()
 
-mongoose.connect(mongo || process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!")
     })

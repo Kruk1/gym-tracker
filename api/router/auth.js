@@ -2,9 +2,8 @@ const express = require('express')
 const MyError = require('../error/error')
 const User = require('../models/User')
 const router = express.Router()
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {jwttoken} = require('../config.json')
 
 const catchAsync = (fn) =>
 {
@@ -22,7 +21,7 @@ router.post('/login', catchAsync(async (req, res) =>
     const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
     if(!isPasswordCorrect) throw new MyError('Password Incorrect', 400, true)
 
-    const token = jwt.sign({id: user._id, isAdmin: user.isAdmin, login: user.login}, jwttoken || process.env.JWTTOKEN)
+    const token = jwt.sign({id: user._id, isAdmin: user.isAdmin, login: user.login}, process.env.JWTTOKEN)
 
     const {password, isAdmin, ...otherParameters} = user._doc
 
