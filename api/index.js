@@ -22,10 +22,10 @@ app.use('/training', training)
 app.use('/auth', auth)
 app.use('/user', user)
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 app.use((err, req, res, next) =>
