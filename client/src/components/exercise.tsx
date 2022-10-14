@@ -98,7 +98,7 @@ function Exercise(props: any) {
             {isModalShownDay && 
                 <>
                     <div className="backdrop" onClick={showModalDay}></div>
-                    <section className="modal-exercise">
+                    <section className="modal-exercise" style={{height: window.innerHeight}}>
                         <h4>{props.props.name}</h4>
                         <Line options={options} data={data} />
                         <div className="progress-container">

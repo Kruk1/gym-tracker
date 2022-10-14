@@ -223,11 +223,27 @@
     padding: 25px;
 }
 
+.modal-add-exercise
+{
+    max-height: 166px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .modal-add-exercise form 
 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.modal-add-exercise form::-webkit-scrollbar
+{
+    display: none;
 }
 
 .training-input-container
@@ -317,6 +333,9 @@ input[type=number] {
     .modal-exercise
     {
         width: 250px;
+        max-height: 335px;    
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
 
     .modal-exercise h4

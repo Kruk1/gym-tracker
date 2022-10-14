@@ -172,7 +172,7 @@ function Training() {
                     {isModalShown && 
                     <>
                         <div className="backdrop" onClick={showModal}></div>
-                        <section className="modal-add-exercise">
+                        <section className="modal-add-exercise" style={{height: window.innerHeight}}>
                             <form onSubmit={handleSubmit}>
                                 <div className="name-input-container training-input-container">
                                     <label htmlFor="name">Exercise name</label>

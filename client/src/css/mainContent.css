@@ -86,7 +86,7 @@ body
     left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
-    min-height: 350px;
+    max-height: 375px;
     border-radius: 10px;
     padding: 25px;
     display: flex;
@@ -114,6 +114,13 @@ body
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.form-container-create form::-webkit-scrollbar
+{
+    display: none;
 }
 
 .name-input
