@@ -285,3 +285,10 @@ select::-ms-expand
         width: 260px;
     }
 }
+
+@media screen and (max-height: 375px) {
+    .form-container-create
+    {
+        height: 100%;
+    }
+}

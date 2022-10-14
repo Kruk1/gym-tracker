@@ -349,3 +349,17 @@ input[type=number] {
         font-size: 20px;
     }
 }
+
+@media screen and (max-height: 335px) {
+    .modal-exercise
+    {
+        height: 100%;    
+    }
+}
+
+@media screen and (max-height: 166px) {
+    .modal-add-exercise
+    {
+        height: 100%;
+    } 
+}

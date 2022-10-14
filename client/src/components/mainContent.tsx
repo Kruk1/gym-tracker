@@ -177,7 +177,7 @@ function MainContent() {
                     {isShownModalCreate && 
                     <>
                         <div className="backdrop" onClick={showModal}></div>
-                        <section className="form-container-create" style={{height: window.innerHeight}}>
+                        <section className="form-container-create">
                             <form onSubmit={handleSubmit}>
                                 <div className="name-input-container">
                                     <label htmlFor="name">Title</label>
