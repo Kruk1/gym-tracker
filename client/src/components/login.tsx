@@ -9,8 +9,9 @@ function LoginForm() {
         login: '',
         password: ''
     })
-    const navigate = useNavigate()
     const location = useLocation()
+    const [response, setResponse] = useState(location.state)
+    const navigate = useNavigate()
     window.history.replaceState({}, document.title)
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>)
@@ -26,21 +27,37 @@ function LoginForm() {
     
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>)
     {
-        event.preventDefault();
-        const res = await axios.post(`/auth/login`, {
-            login: login.login,
-            password: login.password
-        })
-        if(res.status === 200)
+        try
         {
-            navigate('/plans')
+            event.preventDefault();
+            if(!login.login)
+            {
+                setResponse('Username is required!')
+                return
+            }
+            if(!login.password)
+            {
+                setResponse('Password is required!')
+                return
+            }
+            await axios.post(`/auth/login`, {
+                login: login.login,
+                password: login.password
+            })
+            navigate('/plans')        
+        }
+        catch(e: any)
+        {
+            event.preventDefault()
+            const errors = e.response.data.message
+            setResponse(errors)
         }
     }
 
     return (
-        <main className="log-in-center">
+        <main className="log-in-center" style={{height: window.innerHeight}}>
             <form className='log-in-form' onSubmit={handleSubmit}>
-                {location.state && <div className="error">{location.state}</div>}
+                {response && <div className="error">{response}</div>}
                 <i className="icon-user"></i>
                 <label htmlFor="text">Login</label>
                 <input type="text" name='login' value={login.login} onChange={handleChange} className="log-in-input" placeholder='login' autoComplete='off' />

@@ -4,7 +4,7 @@ import '../css/loading.css'
 function Loading() {
 
     return (
-        <div className="center">
+        <div className="center" style={{height: window.innerHeight}}>
             <div className="loading-spinner"></div>
         </div>
     );

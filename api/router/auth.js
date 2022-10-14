@@ -15,6 +15,9 @@ const catchAsync = (fn) =>
 
 router.post('/login', catchAsync(async (req, res) => 
 {
+    if(!req.body.login) throw new MyError('Username is required!', 400, true)
+    if(!req.body.password) throw new MyError('Password is required!', 400, true)
+
     const user = await User.findOne({login: req.body.login})
     if(!user) throw new MyError('User not found!', 404, true)
 

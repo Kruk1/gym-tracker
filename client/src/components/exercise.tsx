@@ -39,7 +39,6 @@ function Exercise(props: any) {
     const [isModalShownDay, setIsModalShownDay] = useState(false)
     const [number, setNumber] = useState('')
     const idExercise = props.props._id
-    const [progress, setProgress] = useState()
     const {id} = useParams()
 
     function showModalDay(event: React.MouseEvent)
@@ -55,9 +54,12 @@ function Exercise(props: any) {
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>)
     {
         event.preventDefault()
-        await axios.patch('/training/UpdateResults', {number: number, idExercise: idExercise, idTraining: id, idDay: props.props.idDay})
-        props.props.setIsRendering(false)
-        props.props.getTrainingInfo()
+        if(number)
+        {
+            await axios.patch('/training/UpdateResults', {number: number, idExercise: idExercise, idTraining: id, idDay: props.props.idDay})
+            props.props.setIsRendering(false)
+            props.props.getTrainingInfo()
+        }
     }
 
     function calcProgress()

@@ -8,6 +8,8 @@ body
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+    position: relative;
 }
 
 .gym-tracker-container h1
@@ -81,7 +83,7 @@ body
 
 .form-container-create
 {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
