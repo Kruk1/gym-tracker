@@ -32,6 +32,8 @@ type exercise =
 function Training() {
     const [isRendering, setIsRendering] = useState(false)
     const [isModalShown, setIsModalShown] = useState(false)
+    const [isError, setIsError] = useState(false)
+    const [response, setResponse] = useState('')
     const [idDay, setIdDay] = useState('')
     const [exerciseCreateInfo, setExerciseCreateInfo] = useState<exercise>(
         {
@@ -42,6 +44,11 @@ function Training() {
     )
     const {id} = useParams()
     const [training, setTraining] = useState<trainingType>()
+    const errorStyle: React.CSSProperties = 
+    {
+        borderColor: 'red',
+        color: 'red'
+    }
     const navigate = useNavigate()
 
     useEffect(() => 
@@ -66,6 +73,8 @@ function Training() {
             {
                 navigate('/', {state: error.message})
             }
+            setIsError(true)
+            setResponse('Something went wrong! Try reload page')
         }
     }
 
@@ -76,8 +85,19 @@ function Training() {
 
     async function deleteTraining(event: React.MouseEvent<HTMLButtonElement>)
     {
-        await axios.delete(`/training/DeleteTraining?id=${id}`)
-        navigate('/plans', {state: 'Training deleted!'})
+        try
+        {
+            await axios.delete(`/training/DeleteTraining?id=${id}`)
+            navigate('/plans', {state: 'Training deleted!'})
+        }
+        catch(e: any)
+        {
+            const error = e.response.data
+            if(error.authRedirect)
+            {
+                navigate('/', {state: error.message})
+            }
+        }
     }
 
     async function redirectToHomepage(event: React.MouseEvent<HTMLButtonElement>)
@@ -131,12 +151,22 @@ function Training() {
                     id: ''
                 }
             )
+            setIsError(false)
+            setResponse('Exercise created!')
             getTrainingInfo()
-            console.log('Created')
         }
-        catch(e)
+        catch(e: any)
         {
-            console.log('went wrong')
+            event.preventDefault()
+            const error = e.response.data
+            if(error.authRedirect)
+            {
+                navigate('/', {state: error.message})
+            }
+            const errors = Object.keys(e.response.data.errors)[0]
+            setResponse(e.response.data.errors[errors].message)
+            setIsError(true)
+            showModal()
         }
     }
 
@@ -160,6 +190,7 @@ function Training() {
         <>
             {!isRendering ? <Loading /> : 
                 <main className="training-container">
+                    {response && <div className='response-info' style={isError ? errorStyle : {}}>{response}</div>}
                     <h1>{training?.name}</h1>
                     <section className="buttons">
                         <button aria-label='Back' className='back-btn' onClick={redirectToHomepage}>Back to Homepage</button>

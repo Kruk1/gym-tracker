@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom'
 import '../css/login.css';
 import '../css/cleanStyle.css';
@@ -9,10 +9,16 @@ function LoginForm() {
         login: '',
         password: ''
     })
+    const [height, setHeight] = useState<number>()
     const location = useLocation()
     const [response, setResponse] = useState(location.state)
     const navigate = useNavigate()
     window.history.replaceState({}, document.title)
+
+    useEffect(() =>
+    {
+        setHeight(window.innerHeight)
+    }, [])
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>)
     {
@@ -41,7 +47,7 @@ function LoginForm() {
                 return
             }
             await axios.post(`/auth/login`, {
-                login: login.login,
+                login: login.login.trim(),
                 password: login.password
             })
             navigate('/plans')        
@@ -55,7 +61,7 @@ function LoginForm() {
     }
 
     return (
-        <main className="log-in-center" style={{height: window.innerHeight}}>
+        <main className="log-in-center" style={{height: height}}>
             <form className='log-in-form' onSubmit={handleSubmit}>
                 {response && <div className="error">{response}</div>}
                 <i className="icon-user"></i>

@@ -1,5 +1,4 @@
 const User = require('./models/User')
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const salt = bcrypt.genSaltSync(10);

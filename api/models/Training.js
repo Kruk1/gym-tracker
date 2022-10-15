@@ -28,7 +28,7 @@ const trainingSchema = mongoose.Schema({
                         name:
                         {
                             type: String,
-                            required: [true, 'Name exercise is required']
+                            required: [true, 'Exercise name is required']
                         },
                         results: [Number],
                         length: [String]

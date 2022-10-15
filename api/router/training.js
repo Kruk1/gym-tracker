@@ -62,11 +62,13 @@ router.post('/CreateExercise', catchAsync(async (req, res) =>
 {
     const training = await Training.findById(req.body.trainingId)
     const day = training.days.find(day => day._id == req.body.idDay)
+    const length = req.body.results ? [''] : []
+    const results = req.body.results ? [req.body.results] : []
     day.exercises.push(
         {
             name: req.body.name,
-            results: [req.body.results],
-            length: ['']
+            results: results,
+            length: length
         }
     )
     await training.save()

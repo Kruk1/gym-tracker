@@ -33,17 +33,24 @@ const options = {
     }
 };
 
-
-
 function Exercise(props: any) {
     const [isModalShownDay, setIsModalShownDay] = useState(false)
     const [number, setNumber] = useState('')
+    const [isError, setIsError] = useState(false)
+    const [response, setResponse] = useState('')
+    const errorStyle: React.CSSProperties = 
+    {
+        borderColor: 'red',
+        color: 'red'
+    }
     const idExercise = props.props._id
     const {id} = useParams()
 
     function showModalDay(event: React.MouseEvent)
     {
         setIsModalShownDay(prev => !prev)
+        setResponse('')
+        setIsError(false)
     }
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>)
@@ -59,6 +66,11 @@ function Exercise(props: any) {
             await axios.patch('/training/UpdateResults', {number: number, idExercise: idExercise, idTraining: id, idDay: props.props.idDay})
             props.props.setIsRendering(false)
             props.props.getTrainingInfo()
+        }
+        else
+        {
+            setIsError(true)
+            setResponse('You have to give a number!')
         }
     }
 
@@ -99,6 +111,7 @@ function Exercise(props: any) {
                 <>
                     <div className="backdrop" onClick={showModalDay}></div>
                     <section className="modal-exercise">
+                        {response && <div className='response-info exercise-info' style={isError ? errorStyle : {}}>{response}</div>}
                         <h4>{props.props.name}</h4>
                         <Line options={options} data={data} />
                         <div className="progress-container">

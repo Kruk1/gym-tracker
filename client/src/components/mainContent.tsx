@@ -106,7 +106,6 @@ function MainContent() {
                 days: trainingCreateInfo.days,
                 description: trainingCreateInfo.description
             })
-            console.log('done')
             setIsRendering(false)
             setIsShownModalCreate(false)
             setTrainingCreateInfo({
@@ -121,6 +120,11 @@ function MainContent() {
         catch(e: any)
         {
             event.preventDefault()
+            const error = e.response.data
+            if(error.authRedirect)
+            {
+                navigate('/', {state: error.message})
+            }
             const errors = Object.keys(e.response.data.errors)[0]
             setResponse(e.response.data.errors[errors].message)
             setIsError(true)
