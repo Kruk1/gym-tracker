@@ -57,6 +57,23 @@
     background-color: #414141;
 }
 
+.description
+{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 450px;
+}
+
+.description h2
+{
+    font-size: 25px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
 .days
 {
     display: flex;

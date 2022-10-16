@@ -197,6 +197,10 @@ function Training() {
                         <button aria-label='Update' className='update-btn'>Update Training</button>
                         <button aria-label='Delete' className='delete-btn' onClick={deleteTraining}>Delete Training</button>
                     </section>
+                    <section className="description">
+                        <h2>Description:</h2>
+                        {training?.description}
+                    </section>
                     <section className="days">
                         {days}
                     </section>
