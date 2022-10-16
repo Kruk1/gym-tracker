@@ -179,7 +179,8 @@ function Training() {
             getIdOfDay: getIdOfDay,
             day: day,
             setIsRendering: setIsRendering,
-            getTrainingInfo: getTrainingInfo
+            getTrainingInfo: getTrainingInfo,
+            setResponse: setResponse
         }
         return (
             <Day props={dayProps} key={day._id}/>

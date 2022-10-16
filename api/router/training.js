@@ -86,4 +86,15 @@ router.patch('/UpdateResults', catchAsync(async (req, res) =>
     res.send('Created!')
 }))
 
+router.delete('/DeleteExercise', catchAsync(async (req, res) =>
+{
+    const training = await Training.findById(req.body.idTraining)
+    const day = training.days.find(day => day._id == req.body.idDay)
+    const exercise = day.exercises.find(exercise => exercise._id == req.body.idExercise)
+    const newExercises = day.exercises.filter(prevExercise => prevExercise._id != exercise._id)
+    day.exercises = newExercises
+    await training.save()
+    res.send('Deleted!')
+}))
+
 module.exports = router

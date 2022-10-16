@@ -74,6 +74,14 @@ function Exercise(props: any) {
         }
     }
 
+    async function deleteExercise() 
+    {
+        await axios.delete('/training/DeleteExercise', {data: {idExercise: idExercise, idTraining: id, idDay: props.props.idDay}})
+        props.props.setIsRendering(false)
+        props.props.setResponse('Exercise deleted!')
+        props.props.getTrainingInfo()
+    }
+
     function calcProgress()
     {
         const progress = Math.floor(props.props.results[props.props.results.length-1] * 100 / props.props.results[props.props.results.length-2]) - 100
@@ -113,6 +121,9 @@ function Exercise(props: any) {
                     <section className="modal-exercise">
                         {response && <div className='response-info exercise-info' style={isError ? errorStyle : {}}>{response}</div>}
                         <h4>{props.props.name}</h4>
+                        <div className="buttons-exercise">
+                            <button aria-label='Delete exercise' className='delete-btn' onClick={deleteExercise}>Delete Exercise</button>
+                        </div>
                         <Line options={options} data={data} />
                         <div className="progress-container">
                             <h5 style={calcProgress() < 0 ? {color: 'red'} : {}}>Last gains(percent) {calcProgress()}%</h5>

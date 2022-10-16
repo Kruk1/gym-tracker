@@ -140,6 +140,11 @@
     font-weight: 400;
 }
 
+.buttons-exercise
+{
+    margin: 10px 0 5px 0;
+}
+
 .modal-exercise form
 {
     display: flex;

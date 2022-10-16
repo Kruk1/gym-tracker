@@ -1,5 +1,4 @@
 import '../css/cleanStyle.css'
-import {useState} from 'react'
 import Exercise from './exercise';
 
 function Day(props: any) {
@@ -9,6 +8,7 @@ function Day(props: any) {
         exercise.setIsRendering = props.props.setIsRendering
         exercise.idDay = props.props.day._id
         exercise.getTrainingInfo = props.props.getTrainingInfo
+        exercise.setResponse = props.props.setResponse
         return <Exercise props={exercise} key={exercise._id}/>
     })
 
