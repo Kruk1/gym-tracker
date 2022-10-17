@@ -110,7 +110,7 @@ function Exercise(props: any) {
                     {props.props.results[0] ? 
                         <p>
                             {props.props.results[props.props.results.length-1]}
-                            <span>kg</span>
+                            {props.props.units ? props.props.units : 'kg'}
                         </p> : <p>none</p>
                     }
                 </div>
@@ -130,7 +130,7 @@ function Exercise(props: any) {
                             <form onSubmit={handleSubmit}>
                                 <div className="form-result-container">
                                     <label htmlFor="number">Send new gains</label>
-                                    <input type="number" name="number" id="number" step="any" onChange={handleChange}/>
+                                    <input type="number" name="number" id="number" step="any" onChange={handleChange} value={number}/>
                                 </div>
                                 <button>Send</button>
                             </form>

@@ -68,7 +68,8 @@ router.post('/CreateExercise', catchAsync(async (req, res) =>
         {
             name: req.body.name,
             results: results,
-            length: length
+            length: length,
+            units: req.body.units
         }
     )
     await training.save()

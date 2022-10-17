@@ -31,7 +31,13 @@ const trainingSchema = mongoose.Schema({
                             required: [true, 'Exercise name is required']
                         },
                         results: [Number],
-                        length: [String]
+                        length: [String],
+                        units: 
+                        {
+                            type: String,
+                            enum : ['kg','lbs'],
+                            default: 'kg'
+                        }
                     }
                 ]
             }

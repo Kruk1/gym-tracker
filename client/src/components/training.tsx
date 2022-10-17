@@ -27,6 +27,7 @@ type exercise =
     name: string;
     results: number;
     id: string;
+    units: string;
 }
 
 function Training() {
@@ -39,7 +40,8 @@ function Training() {
         {
             name: '',
             results: NaN,
-            id: ''
+            id: '',
+            units: ''
         }
     )
     const {id} = useParams()
@@ -116,11 +118,23 @@ function Training() {
         setExerciseCreateInfo({
             name: '',
             results: NaN,
-            id: ''
+            id: '',
+            units: ''
         })
     }
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>)
+    {
+        setExerciseCreateInfo(prevObject =>
+            {
+                return {
+                    ...prevObject, 
+                    [event.target.name]: event.target.value
+                }
+            })
+    }
+
+    function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>)
     {
         setExerciseCreateInfo(prevObject =>
             {
@@ -140,7 +154,8 @@ function Training() {
                 name: exerciseCreateInfo.name,
                 results: exerciseCreateInfo.results,
                 trainingId: id,
-                idDay: idDay
+                idDay: idDay,
+                units: exerciseCreateInfo.units
             })
             setIsRendering(false)
             setIsModalShown(false)
@@ -148,7 +163,8 @@ function Training() {
                 {
                     name: '',
                     results: NaN,
-                    id: ''
+                    id: '',
+                    units: ''
                 }
             )
             setIsError(false)
@@ -198,10 +214,12 @@ function Training() {
                         <button aria-label='Update' className='update-btn'>Update Training</button>
                         <button aria-label='Delete' className='delete-btn' onClick={deleteTraining}>Delete Training</button>
                     </section>
-                    <section className="description">
-                        <h2>Description:</h2>
-                        {training?.description}
-                    </section>
+                    {training?.description && 
+                        <section className="description">
+                            <h2>Description:</h2>
+                            {training?.description}
+                        </section>
+                    }
                     <section className="days">
                         {days}
                     </section>
@@ -214,9 +232,20 @@ function Training() {
                                     <label htmlFor="name">Exercise name</label>
                                     <input type="text" name='name' className='name-input training-input' onChange={handleChange}/>
                                 </div>
-                                <div className="number-input-container">
-                                    <label htmlFor="results">Start value(must be a number)</label>
-                                    <input type="number" step="any" name='results' className='name-input training-input' onChange={handleChange}/>
+                                <div className="value-inputs">
+                                    <div className="number-input-container">
+                                        <label htmlFor="results">Start value(must be a number)</label>
+                                        <input type="number" step="any" name='results' className='name-input number-input' onChange={handleChange}/>
+                                    </div>
+                                    <div className="units-select-container">
+                                        <label htmlFor="units">Unit</label>
+                                        <div className="custom-select">
+                                        <select name="units" className="select-exercise-input" onChange={handleSelectChange} value={exerciseCreateInfo.units}>
+                                            <option value="kg">kg</option>
+                                            <option value="lbs">lbs</option>
+                                        </select>
+                                    </div>
+                                    </div>
                                 </div>
                                 <input type="text" name='id' value={idDay} onChange={handleChange} hidden/>
                                 <button>Create exercise</button>
