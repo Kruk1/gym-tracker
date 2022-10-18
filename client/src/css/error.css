@@ -1,0 +1,20 @@
+#error-404
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#error-404 h1
+{
+    font-size: 80px;
+    font-weight: 400;
+    color: red;
+    text-align: center;
+}
+
+#error-404 h2
+{
+    font-size: 40px;
+}
