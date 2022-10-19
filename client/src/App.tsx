@@ -7,18 +7,21 @@ import { CookiesProvider } from 'react-cookie';
 import Training from './components/training';
 import Nav from './components/nav';
 import Error404 from './components/error';
+import Timer from './components/timer';
 
 function App() {
     return (
         <>
             <CookiesProvider>
                 <AuthProvider>
-                    <Nav />
                     <Routes>
                         <Route path='/' element={<LoginForm />} />
-                        <Route path='/plans'>
-                            <Route index element={<MainContent />} />
-                            <Route path=':id' element={<Training />} />
+                        <Route path='/user' element={<Nav />}> 
+                            <Route path='plans'>
+                                <Route index element={<MainContent />} />
+                                <Route path=':id' element={<Training />} />
+                            </Route>
+                            <Route path='timer' element={<Timer />} />
                         </Route>
                         <Route path='*' element={<Error404 />} />
                     </Routes>

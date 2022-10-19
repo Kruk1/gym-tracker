@@ -52,7 +52,7 @@ function MainContent() {
     const trainings = trainingData.map(training => 
     {
         return (
-            <Link to={`/plans/${training._id}`} className="training" key={training._id}>
+            <Link to={`/user/plans/${training._id}`} className="training" key={training._id}>
                 <h3>{training.name}</h3>
             </Link>
         )

@@ -18,8 +18,8 @@ function Nav() {
             <header ref={ref}>
                 <nav>
                     <ul>
-                        <li><Link to='/plans'>Tracker</Link></li>
-                        <li><Link to='/timer'>Timer</Link></li>
+                        <li><Link to='/user/plans'>Tracker</Link></li>
+                        <li><Link to='/user/timer'>Timer</Link></li>
                     </ul>
                 </nav>
             </header>

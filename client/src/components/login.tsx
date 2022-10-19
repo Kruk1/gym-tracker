@@ -50,7 +50,7 @@ function LoginForm() {
                 login: login.login.trim(),
                 password: login.password
             })
-            navigate('/plans')        
+            navigate('/user/plans')        
         }
         catch(e: any)
         {

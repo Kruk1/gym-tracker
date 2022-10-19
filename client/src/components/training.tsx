@@ -64,7 +64,7 @@ function Training() {
         {
             const res = await axios.get(`/training/GetTrainingDetails?id=${id}`)
             if(!res.data)
-                navigate('/plans')
+                navigate('/user/plans')
             setTraining(res.data)
             setTimeout(rendered, 1000)
         }
@@ -90,7 +90,7 @@ function Training() {
         try
         {
             await axios.delete(`/training/DeleteTraining?id=${id}`)
-            navigate('/plans', {state: 'Training deleted!'})
+            navigate('/user/plans', {state: 'Training deleted!'})
         }
         catch(e: any)
         {
@@ -104,7 +104,7 @@ function Training() {
 
     async function redirectToHomepage(event: React.MouseEvent<HTMLButtonElement>)
     {
-        navigate('/plans')
+        navigate('/user/plans')
     }
     
     function getIdOfDay(day: any)

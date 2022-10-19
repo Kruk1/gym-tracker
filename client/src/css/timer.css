@@ -1,0 +1,29 @@
+#timer-main
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#timer-main h1
+{
+    font-size: 50px;
+    color: rgb(174, 93, 255);
+    margin-top: 20px;
+}
+
+#timer-main h2
+{
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.timer
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    border-radius: 50%;
+}
