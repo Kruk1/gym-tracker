@@ -12,6 +12,8 @@
     "mongoose": "^6.6.5",
     "nodemon": "^2.0.20",
     "react-flash-message": "^1.0.8",
+    "react-native-keep-awake": "^4.0.0",
+    "react-stay-awake": "^0.1.0",
     "use-stay-awake": "^0.1.7"
   },
   "scripts": {
