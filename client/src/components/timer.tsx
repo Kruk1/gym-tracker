@@ -3,6 +3,7 @@ import { useHeight } from '../context/AuthContext';
 import '../css/cleanStyle.css';
 import '../css/timer.css'
 import Loading from './loading';
+import StayAwake from 'stayawake.js'
 
 function Timer() {
     const [isRendering, setIsRendering] = useState(false)
@@ -26,6 +27,7 @@ function Timer() {
     {
         setTimeout(rendered, 1000)
         setHeightCenter(window.innerHeight - height)
+        StayAwake.init()
     })
 
     function rendered()
@@ -129,9 +131,11 @@ function Timer() {
                 counter.current = setTimeout(startBreakTimer, 1000)
             else
                 counter.current = setTimeout(startExerciseTimer, 1000)
+            StayAwake.enable()
         }
         else
         {
+            StayAwake.disable()
             clearTimeout(counter.current)
         }
     }, [isEnabledTimer, timer])

@@ -14,6 +14,7 @@
     "react-flash-message": "^1.0.8",
     "react-native-keep-awake": "^4.0.0",
     "react-stay-awake": "^0.1.0",
+    "stayawake.js": "^1.0.2",
     "use-stay-awake": "^0.1.7"
   },
   "scripts": {
@@ -24,5 +25,8 @@
   },
   "engines": {
     "node": "16.15.0"
+  },
+  "devDependencies": {
+    "@types/react-native-keep-awake": "^2.0.3"
   }
 }
