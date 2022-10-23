@@ -76,8 +76,8 @@ function Timer() {
                 {
                     return {
                         ...prevObject,
-                        minutes: exerciseBreakMinuteInput.current.value, 
-                        seconds: exerciseBreakSecondsInput.current.value
+                        minutes: exerciseBreakMinuteInput.current.value ? exerciseBreakMinuteInput.current.value : 0, 
+                        seconds: exerciseBreakSecondsInput.current.value ? exerciseBreakSecondsInput.current.value : 0
                     }
                 })
             setIsTimeForExercise(true)
@@ -113,8 +113,8 @@ function Timer() {
                 {
                     return {
                         ...prevObject,
-                        minutesBreak: exerciseExerciseMinuteInput.current.value, 
-                        secondsBreak: exerciseExerciseSecondsInput.current.value
+                        minutesBreak: exerciseExerciseMinuteInput.current.value ? exerciseExerciseMinuteInput.current.value : 0, 
+                        secondsBreak: exerciseExerciseSecondsInput.current.value ? exerciseExerciseSecondsInput.current.value : 0
                     }
                 })
             setIsTimeForExercise(false)
