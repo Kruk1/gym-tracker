@@ -70,6 +70,11 @@
     text-align: center;
 }
 
+.time-input:disabled
+{
+    color: gray;
+}
+
 .exercise-timer-inputs
 {
     display: flex;
@@ -111,7 +116,6 @@
     background-color: #212121;
     border: 1px solid #323232;
     color: white;
-    margin-top: 15px;
     width: 125px;
     line-height: 30px;
     border-radius: 5px;
@@ -122,6 +126,20 @@
 {
     cursor: pointer;
     background-color: #434343;
+}
+
+.buttons-timer
+{
+    margin-top: 15px;
+    display: flex;
+    width: 300px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.buttons-timer button
+{
+    margin: 0 5px;
 }
 
 @media screen and (max-width: 670px) {

@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react'
-import { useHeight } from '../context/AuthContext';
-import '../css/cleanStyle.css';
+import { useHeight } from '../context/AuthContext'
+import '../css/cleanStyle.css'
 import '../css/timer.css'
-import Loading from './loading';
+import Loading from './loading'
 
 function Timer() {
     const [isRendering, setIsRendering] = useState(false)
@@ -27,16 +27,39 @@ function Timer() {
     {
         setTimeout(rendered, 1000)
         setHeightCenter(window.innerHeight - height)
-    }, [])
+    })
 
     const requestWakeLock = async () => {
         try {
             wakeLock = await navigator.wakeLock.request('screen');
-            console.log('Wake Lock is active');
         } catch (err) {
             console.error(`${err}`);
         }
-      };
+    }
+
+    function resetTimerButton()
+    {
+        const breakMinute = exerciseBreakMinuteInput.current
+        const breakSeconds = exerciseBreakSecondsInput.current
+        const exerciseMinute = exerciseExerciseMinuteInput.current
+        const exerciseSeconds = exerciseExerciseSecondsInput.current
+        breakMinute.removeAttribute('disabled', '')
+        breakSeconds.removeAttribute('disabled', '')
+        exerciseMinute.removeAttribute('disabled', '')
+        exerciseSeconds.removeAttribute('disabled', '')
+        setIsTimeForExercise(false)
+        setIsEnabledTimer(false)        
+        setTimer(prevObject => 
+            {
+                return {
+                    ...prevObject,
+                    minutes: breakMinute.value < 60 && breakMinute > 0 ? breakMinute.value : 0, 
+                    seconds: breakSeconds.value < 60 && breakSeconds > 0 ? breakSeconds.value : 0,
+                    minutesBreak: exerciseMinute.value < 60 && exerciseMinute > 0 ? exerciseMinute.value : 0, 
+                    secondsBreak: exerciseSeconds.value < 60 && exerciseSeconds > 0 ? exerciseSeconds.value : 0
+                }
+            })
+    }
 
     function rendered()
     {
@@ -149,6 +172,10 @@ function Timer() {
     function setTimerButton(event: React.MouseEvent<HTMLButtonElement>)
     {
         requestWakeLock()
+        exerciseBreakMinuteInput.current.setAttribute('disabled', '')
+        exerciseBreakSecondsInput.current.setAttribute('disabled', '')
+        exerciseExerciseMinuteInput.current.setAttribute('disabled', '')
+        exerciseExerciseSecondsInput.current.setAttribute('disabled', '')
         setIsEnabledTimer(prevState => !prevState)
     }
 
@@ -195,7 +222,10 @@ function Timer() {
                             </div>
                         </div>
                     </div>
-                    <button onClick={setTimerButton}>Set Timer</button>
+                    <div className="buttons-timer">
+                        <button onClick={setTimerButton}>{!isEnabledTimer ? 'Start Timer' : 'Stop Timer'}</button>
+                        <button onClick={resetTimerButton}>Reset Timer</button>
+                    </div>
                 </section>
             </main>}
         </>
