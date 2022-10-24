@@ -53,10 +53,10 @@ function Timer() {
             {
                 return {
                     ...prevObject,
-                    minutes: breakMinute.value < 60 && breakMinute > 0 ? breakMinute.value : 0, 
-                    seconds: breakSeconds.value < 60 && breakSeconds > 0 ? breakSeconds.value : 0,
-                    minutesBreak: exerciseMinute.value < 60 && exerciseMinute > 0 ? exerciseMinute.value : 0, 
-                    secondsBreak: exerciseSeconds.value < 60 && exerciseSeconds > 0 ? exerciseSeconds.value : 0
+                    minutes: breakMinute.value < 60 && breakMinute.value > 0 ? breakMinute.value : 0, 
+                    seconds: breakSeconds.value < 60 && breakSeconds.value > 0 ? breakSeconds.value : 0,
+                    minutesBreak: exerciseMinute.value < 60 && exerciseMinute.value > 0 ? exerciseMinute.value : 0, 
+                    secondsBreak: exerciseSeconds.value < 60 && exerciseSeconds.value > 0 ? exerciseSeconds.value : 0
                 }
             })
     }
