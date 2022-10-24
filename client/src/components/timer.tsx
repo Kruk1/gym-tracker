@@ -21,7 +21,7 @@ function Timer() {
     const exerciseBreakSecondsInput = useRef<any>()
     const exerciseExerciseSecondsInput = useRef<any>()
     const height = useHeight()
-    const video = document.createElement('video')
+    const video = document.querySelector('video')
 
     useEffect(() => 
     {
@@ -43,9 +43,10 @@ function Timer() {
 
     function stayAwake()
     {
+        const video = document.createElement('video')
         video.setAttribute('loop', '')
         video.setAttribute('style', 'position: fixed; top: 0; visibility: hidden;');
-        addSourceToVideo(video,'webm', base64('video/webm', 'GkXfo0AgQoaBAUL3gQFC8oEEQvOBCEKCQAR3ZWJtQoeBAkKFgQIYU4BnQI0VSalmQCgq17FAAw9CQE2AQAZ3aGFtbXlXQUAGd2hhbW15RIlACECPQAAAAAAAFlSua0AxrkAu14EBY8WBAZyBACK1nEADdW5khkAFVl9WUDglhohAA1ZQOIOBAeBABrCBCLqBCB9DtnVAIueBAKNAHIEAAIAwAQCdASoIAAgAAUAmJaQAA3AA/vz0AAA='))
+        addSourceToVideo(video, 'mp4', base64('video/mp4', 'vid4'))
         document.body.appendChild(video)
     }
 
@@ -65,6 +66,18 @@ function Timer() {
                     [event.target.name]: event.target.value
                 }
             })
+        }
+    }
+
+    async function playVideo()
+    {
+        try
+        {
+            await video?.play()
+        }
+        catch(e)
+        {
+            console.log('screen can sleep')
         }
     }
 
@@ -153,14 +166,14 @@ function Timer() {
         }
         else
         {
-            video.pause()
+            video?.pause()
             clearTimeout(counter.current)
         }
     }, [isEnabledTimer, timer])
 
     function setTimerButton(event: React.MouseEvent<HTMLButtonElement>)
     {
-        video.play()
+        playVideo()
         setIsEnabledTimer(prevState => !prevState)
     }
 
