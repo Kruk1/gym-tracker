@@ -21,34 +21,22 @@ function Timer() {
     const exerciseBreakSecondsInput = useRef<any>()
     const exerciseExerciseSecondsInput = useRef<any>()
     const height = useHeight()
-    const video = document.querySelector('video')
+    let wakeLock = null
 
     useEffect(() => 
     {
         setTimeout(rendered, 1000)
         setHeightCenter(window.innerHeight - height)
-        stayAwake()
     }, [])
 
-    function addSourceToVideo(element: HTMLVideoElement, type: string, dataURI: string) {
-        const source = document.createElement('source');
-        source.src = dataURI;
-        source.type = 'video/' + type;
-        element.appendChild(source);
-    }
-
-    const base64 = function(mimeType: string, base64: string) {
-        return 'data:' + mimeType + ';base64,' + base64;
-    };
-
-    function stayAwake()
-    {
-        const video = document.createElement('video')
-        video.setAttribute('loop', '')
-        video.setAttribute('style', 'position: fixed; top: 0; visibility: hidden;');
-        addSourceToVideo(video, 'mp4', base64('video/mp4', 'vid4'))
-        document.body.appendChild(video)
-    }
+    const requestWakeLock = async () => {
+        try {
+            wakeLock = await navigator.wakeLock.request('screen');
+            console.log('Wake Lock is active');
+        } catch (err) {
+            console.error(`${err}`);
+        }
+      };
 
     function rendered()
     {
@@ -66,18 +54,6 @@ function Timer() {
                     [event.target.name]: event.target.value
                 }
             })
-        }
-    }
-
-    async function playVideo()
-    {
-        try
-        {
-            await video?.play()
-        }
-        catch(e)
-        {
-            console.log('screen can sleep')
         }
     }
 
@@ -166,14 +142,13 @@ function Timer() {
         }
         else
         {
-            video?.pause()
             clearTimeout(counter.current)
         }
     }, [isEnabledTimer, timer])
 
     function setTimerButton(event: React.MouseEvent<HTMLButtonElement>)
     {
-        playVideo()
+        requestWakeLock()
         setIsEnabledTimer(prevState => !prevState)
     }
 
