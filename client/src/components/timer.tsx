@@ -3,7 +3,6 @@ import { useHeight } from '../context/AuthContext';
 import '../css/cleanStyle.css';
 import '../css/timer.css'
 import Loading from './loading';
-import StayAwake from 'stayawake.js'
 
 function Timer() {
     const [isRendering, setIsRendering] = useState(false)
@@ -22,13 +21,33 @@ function Timer() {
     const exerciseBreakSecondsInput = useRef<any>()
     const exerciseExerciseSecondsInput = useRef<any>()
     const height = useHeight()
+    const video = document.createElement('video')
 
     useEffect(() => 
     {
         setTimeout(rendered, 1000)
         setHeightCenter(window.innerHeight - height)
-        StayAwake.init()
-    })
+        stayAwake()
+    }, [])
+
+    function addSourceToVideo(element: HTMLVideoElement, type: string, dataURI: string) {
+        const source = document.createElement('source');
+        source.src = dataURI;
+        source.type = 'video/' + type;
+        element.appendChild(source);
+    }
+
+    const base64 = function(mimeType: string, base64: string) {
+        return 'data:' + mimeType + ';base64,' + base64;
+    };
+
+    function stayAwake()
+    {
+        video.setAttribute('loop', '')
+        video.setAttribute('style', 'position: fixed; top: 0; visibility: hidden;');
+        addSourceToVideo(video,'webm', base64('video/webm', 'GkXfo0AgQoaBAUL3gQFC8oEEQvOBCEKCQAR3ZWJtQoeBAkKFgQIYU4BnQI0VSalmQCgq17FAAw9CQE2AQAZ3aGFtbXlXQUAGd2hhbW15RIlACECPQAAAAAAAFlSua0AxrkAu14EBY8WBAZyBACK1nEADdW5khkAFVl9WUDglhohAA1ZQOIOBAeBABrCBCLqBCB9DtnVAIueBAKNAHIEAAIAwAQCdASoIAAgAAUAmJaQAA3AA/vz0AAA='))
+        document.body.appendChild(video)
+    }
 
     function rendered()
     {
@@ -131,17 +150,17 @@ function Timer() {
                 counter.current = setTimeout(startBreakTimer, 1000)
             else
                 counter.current = setTimeout(startExerciseTimer, 1000)
-            StayAwake.enable()
         }
         else
         {
-            StayAwake.disable()
+            video.pause()
             clearTimeout(counter.current)
         }
     }, [isEnabledTimer, timer])
 
     function setTimerButton(event: React.MouseEvent<HTMLButtonElement>)
     {
+        video.play()
         setIsEnabledTimer(prevState => !prevState)
     }
 
