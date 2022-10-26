@@ -13,10 +13,12 @@
     "mil-no-sleep": "^1.2.1",
     "mongoose": "^6.6.5",
     "nodemon": "^2.0.20",
+    "nosleep.js": "^0.12.0",
     "react-flash-message": "^1.0.8",
     "react-native-keep-awake": "^4.0.0",
     "react-stay-awake": "^0.1.0",
     "stayawake.js": "^1.0.2",
+    "use-no-sleep": "^0.3.1",
     "use-stay-awake": "^0.1.7"
   },
   "scripts": {
@@ -29,6 +31,7 @@
     "node": "16.15.0"
   },
   "devDependencies": {
+    "@types/nosleep.js": "^0.10.0",
     "@types/react-native-keep-awake": "^2.0.3"
   }
 }

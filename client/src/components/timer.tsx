@@ -3,6 +3,7 @@ import { useHeight } from '../context/AuthContext'
 import '../css/cleanStyle.css'
 import '../css/timer.css'
 import Loading from './loading'
+import NoSleep from 'nosleep.js';
 
 function Timer() {
     const [isRendering, setIsRendering] = useState(false)
@@ -21,7 +22,7 @@ function Timer() {
     const exerciseBreakSecondsInput = useRef<any>()
     const exerciseExerciseSecondsInput = useRef<any>()
     const height = useHeight()
-    let wakeLock = null
+    const noSleep = new NoSleep()
 
     useEffect(() => 
     {
@@ -29,16 +30,9 @@ function Timer() {
         setHeightCenter(window.innerHeight - height)
     })
 
-    const requestWakeLock = async () => {
-        try {
-            wakeLock = await navigator.wakeLock.request('screen');
-        } catch (err) {
-            console.error(`${err}`);
-        }
-    }
-
     function resetTimerButton()
     {
+        noSleep.disable()
         const breakMinute = exerciseBreakMinuteInput.current
         const breakSeconds = exerciseBreakSecondsInput.current
         const exerciseMinute = exerciseExerciseMinuteInput.current
@@ -171,7 +165,7 @@ function Timer() {
 
     function setTimerButton(event: React.MouseEvent<HTMLButtonElement>)
     {
-        requestWakeLock()
+        noSleep.enable()
         exerciseBreakMinuteInput.current.setAttribute('disabled', '')
         exerciseBreakSecondsInput.current.setAttribute('disabled', '')
         exerciseExerciseMinuteInput.current.setAttribute('disabled', '')
