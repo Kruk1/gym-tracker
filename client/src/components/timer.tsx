@@ -3,7 +3,8 @@ import { useHeight } from '../context/AuthContext'
 import '../css/cleanStyle.css'
 import '../css/timer.css'
 import Loading from './loading'
-import NoSleep from 'nosleep.js';
+import NoSleep from 'nosleep.js'
+import {isMobile} from 'react-device-detect'
 
 function Timer() {
     const [isRendering, setIsRendering] = useState(false)
@@ -182,7 +183,7 @@ function Timer() {
         <>
             {!isRendering ? <Loading /> :
             <main id='timer-main' style={{height: heightCenter}}>
-                {!isWakeSupp && <div className="wake-info">If you want listen music, you have to set auto lock screen off, because your browser or OS dont support wake lock api.</div>}
+                {!isWakeSupp && isMobile ? <div className="wake-info">If you want listen music, you have to set auto lock screen off, because your browser or OS dont support wake lock api.</div> : null}
                 <div className="titles">
                     <h1>Timer</h1>
                     <h2>You can setup your training break</h2>

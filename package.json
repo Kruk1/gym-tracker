@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@types/nosleep.js": "^0.10.0",
-    "@types/react-native-keep-awake": "^2.0.3"
+    "@types/react-native-keep-awake": "^2.0.3",
+    "react-device-detect": "^2.2.2"
   }
 }
