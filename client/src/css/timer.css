@@ -100,6 +100,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .inputs-timer h3
@@ -140,6 +141,25 @@
 .buttons-timer button
 {
     margin: 0 5px;
+}
+
+.wake-info 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #212121;
+    min-width: 260px;
+    max-width: 500px;
+    min-height: 50px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 3px solid rgb(90, 90, 255);
 }
 
 @media screen and (max-width: 670px) {

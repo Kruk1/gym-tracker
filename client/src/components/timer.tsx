@@ -9,6 +9,7 @@ function Timer() {
     const [isRendering, setIsRendering] = useState(false)
     const [isEnabledTimer, setIsEnabledTimer] = useState(false)
     const [isTimeForExercise, setIsTimeForExercise] = useState(false)
+    const [isWakeSupp, setIsWakeSupp] = useState(false)
     const [heightCenter, setHeightCenter] = useState<number>()
     const [timer, setTimer] = useState({
         minutes: 0,
@@ -26,6 +27,10 @@ function Timer() {
 
     useEffect(() => 
     {
+        if ('wakeLock' in navigator)
+        {
+            setIsWakeSupp(true)
+        }
         setTimeout(rendered, 1000)
         setHeightCenter(window.innerHeight - height)
     })
@@ -177,6 +182,7 @@ function Timer() {
         <>
             {!isRendering ? <Loading /> :
             <main id='timer-main' style={{height: heightCenter}}>
+                {!isWakeSupp && <div className="wake-info">If you want listen music, you have to set auto lock screen off, because your browser or OS dont support wake lock api.</div>}
                 <div className="titles">
                     <h1>Timer</h1>
                     <h2>You can setup your training break</h2>
