@@ -123,6 +123,7 @@ function Exercise(props: any) {
                         <h4>{props.props.name}</h4>
                         <div className="buttons-exercise">
                             <button aria-label='Delete exercise' className='delete-btn' onClick={deleteExercise}>Delete Exercise</button>
+                            <button aria-label='Update' className='update-btn'>Update Results</button>
                         </div>
                         <Line options={options} data={data} />
                         <div className="progress-container">

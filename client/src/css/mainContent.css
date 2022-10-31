@@ -237,6 +237,7 @@ select::-ms-expand
     border-radius: 5px;
     color: rgb(17, 255, 17);
     margin-top: 10px;
+    text-align: center;
     border: 3px solid rgb(17, 255, 17);
 }
 

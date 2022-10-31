@@ -47,7 +47,27 @@ router.get('/GetTrainingDetails', catchAsync(async (req, res) =>
 
 router.patch('/UpdateTraining', catchAsync(async (req, res) =>
 {
-    const training = await Training.find({createdBy: req.user.id})
+    const training = await Training.findByIdAndUpdate(req.body.id, {name: req.body.name, description: req.body.description}, {new: true})
+    const numberOfDays = training.days.length - req.body.days
+    console.log(numberOfDays)
+    if(numberOfDays > 0)
+    {
+        for(let i = 1; i <= Math.abs(numberOfDays); i++)
+        {
+            training.days.pop()
+        }
+    }
+    else if(numberOfDays < 0)
+    {
+        for(let i = 1; i <= Math.abs(numberOfDays); i++)
+        {
+            training.days.push(            {
+                day: `${i}`,
+                exercises: []
+            })
+        }
+    }
+    await training.save()
     res.status(200).send('Training has been updated!')
 }))
 

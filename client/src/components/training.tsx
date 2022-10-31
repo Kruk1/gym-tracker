@@ -33,9 +33,15 @@ type exercise =
 function Training() {
     const [isRendering, setIsRendering] = useState(false)
     const [isModalShown, setIsModalShown] = useState(false)
+    const [isModalUpdateTrainingShown, setIsModalUpdateTrainingShown] = useState(false)
     const [isError, setIsError] = useState(false)
     const [response, setResponse] = useState('')
     const [idDay, setIdDay] = useState('')
+    const [trainingUpdateInfo, setTrainingUpdateInfo] = useState({
+        name: '',
+        days: '',
+        description: ''
+    })
     const [exerciseCreateInfo, setExerciseCreateInfo] = useState<exercise>(
         {
             name: '',
@@ -55,17 +61,15 @@ function Training() {
 
     useEffect(() => 
     {
+        getUserInfo()
         getTrainingInfo()
     }, [])
 
-    async function getTrainingInfo()
+    async function getUserInfo()
     {
         try
         {
-            const res = await axios.get(`/training/GetTrainingDetails?id=${id}`)
-            if(!res.data)
-                navigate('/user/plans')
-            setTraining(res.data)
+            await axios.get('/user/getUser')
             setTimeout(rendered, 1000)
         }
         catch(e: any)
@@ -75,8 +79,36 @@ function Training() {
             {
                 navigate('/', {state: error.message})
             }
-            setIsError(true)
-            setResponse('Something went wrong! Try reload page')
+        }
+    }
+
+    async function getTrainingInfo()
+    {
+        try
+        {
+            const res = await axios.get(`/training/GetTrainingDetails?id=${id}`)
+            if(!res.data)
+                navigate('/user/plans')
+            setTraining(res.data)
+            setTrainingUpdateInfo(prevObject => 
+                {
+                    return {
+                        ...prevObject,
+                        name: res.data.name,
+                        days: res.data.days.length,
+                        description: res.data.description
+                    }
+                })
+            setTimeout(rendered, 1000)
+        }
+        catch(e: any)
+        {
+            const error = e.response.data
+            if(error.authRedirect)
+            {
+                navigate('/', {state: error.message})
+            }
+            navigate('/user/plans', {state: "This training doesn't exist or something went wrong! Try again!"})
         }
     }
 
@@ -119,7 +151,7 @@ function Training() {
             name: '',
             results: NaN,
             id: '',
-            units: ''
+            units: 'kg'
         })
     }
 
@@ -143,6 +175,11 @@ function Training() {
                     [event.target.name]: event.target.value
                 }
             })
+    }
+
+    function showUpdateModal()
+    {
+        setIsModalUpdateTrainingShown(prevState => !prevState)
     }
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -186,6 +223,59 @@ function Training() {
         }
     }
 
+    async function handleUpdateSubmit(event: React.FormEvent<HTMLFormElement>)
+    {
+        try
+        {
+            event.preventDefault()
+            await axios.patch(`/training/UpdateTraining`,
+            {
+                name: trainingUpdateInfo.name,
+                description: trainingUpdateInfo.description,
+                days: trainingUpdateInfo.days,
+                id: id
+            })
+            window.location.reload()        
+        }
+        catch(e)
+        {
+
+        }
+    }
+
+    function handleSelectUpdateChange(event: React.ChangeEvent<HTMLSelectElement>)
+    {
+        setTrainingUpdateInfo(prevObject =>
+            {
+                return {
+                    ...prevObject, 
+                    [event.target.name]: event.target.value
+                }
+            })
+    }
+
+    function handleUpdateChange(event: React.ChangeEvent<HTMLInputElement>)
+    {
+        setTrainingUpdateInfo(prevObject =>
+            {
+                return {
+                    ...prevObject, 
+                    [event.target.name]: event.target.value
+                }
+            })
+    }
+
+    function handleTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>)
+    {
+        setTrainingUpdateInfo(prevObject =>
+            {
+                return {
+                    ...prevObject, 
+                    [event.target.name]: event.target.value
+                }
+            })
+    }
+
     const days = training?.days.map((day, index) =>
     {
         const dayProps = 
@@ -211,7 +301,7 @@ function Training() {
                     <h1>{training?.name}</h1>
                     <section className="buttons">
                         <button aria-label='Back' className='back-btn' onClick={redirectToHomepage}>Back to Homepage</button>
-                        <button aria-label='Update' className='update-btn'>Update Training</button>
+                        <button aria-label='Update' className='update-btn' onClick={showUpdateModal}>Update Training</button>
                         <button aria-label='Delete' className='delete-btn' onClick={deleteTraining}>Delete Training</button>
                     </section>
                     {training?.description && 
@@ -223,6 +313,33 @@ function Training() {
                     <section className="days">
                         {days}
                     </section>
+                    {isModalUpdateTrainingShown &&
+                    <>
+                        <div className="backdrop" onClick={showUpdateModal}></div>
+                        <section className="form-container-create">
+                            <form onSubmit={handleUpdateSubmit}>
+                                <div className="name-input-container">
+                                    <label htmlFor="name">Title</label>
+                                    <input type="text" name="name" className="name-input" placeholder="My gym training" onChange={handleUpdateChange} value={trainingUpdateInfo.name}/>
+                                </div>
+                                <div className="select-input-container">
+                                    <label htmlFor="days">Days</label>
+                                    <div className="custom-select">
+                                        <select name="days" id="select-input" onChange={handleSelectUpdateChange} value={trainingUpdateInfo.days}>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="textarea-container">
+                                    <label htmlFor="description">Description</label>
+                                    <textarea name="description" id="description-input" rows={10} onChange={handleTextAreaChange} value={trainingUpdateInfo.description}></textarea>
+                                </div>
+                                <button>Update training</button>
+                            </form>
+                        </section>
+                    </>}
                     {isModalShown && 
                     <>
                         <div className="backdrop" onClick={showModal}></div>

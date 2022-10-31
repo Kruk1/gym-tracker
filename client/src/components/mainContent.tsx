@@ -27,6 +27,7 @@ function MainContent() {
     const setAuthInfo = useSetAuth()
     const navigate = useNavigate()
     const location = useLocation()
+    const dontExistTraining = "This training doesn't exist or something went wrong! Try again!"
     const [isRendering, setIsRendering] = useState(false)
     const [isError, setIsError] = useState(false)
     const [isShownModalCreate, setIsShownModalCreate] = useState(false)
@@ -169,7 +170,7 @@ function MainContent() {
                 <Loading />
             ) : (
                 <main className="gym-tracker-container">
-                    {response && <div className='response-info' style={isError ? errorStyle : {}}>{response}</div>}
+                    {response && <div className='response-info' style={isError || response === dontExistTraining ? errorStyle : {}}>{response}</div>}
                     <h1>Welcome <span className='bold'>{`${authInfo.login[0].toUpperCase()}${authInfo.login.slice(1)}`}!</span></h1>
                     <h2>Choose your training</h2>
                     <section className="training-options">
