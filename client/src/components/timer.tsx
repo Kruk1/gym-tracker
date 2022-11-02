@@ -5,6 +5,8 @@ import '../css/timer.css'
 import Loading from './loading'
 import NoSleep from 'nosleep.js'
 import {isMobile} from 'react-device-detect'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function Timer() {
     const [isRendering, setIsRendering] = useState(false)
@@ -24,6 +26,7 @@ function Timer() {
     const exerciseBreakSecondsInput = useRef<any>()
     const exerciseExerciseSecondsInput = useRef<any>()
     const height = useHeight()
+    const navigate = useNavigate()
     const noSleep = new NoSleep()
 
     useEffect(() => 
@@ -32,9 +35,27 @@ function Timer() {
         {
             setIsWakeSupp(true)
         }
+        getUserInfo()
         setTimeout(rendered, 1000)
         setHeightCenter(window.innerHeight - height)
     })
+
+    async function getUserInfo()
+    {
+        try
+        {
+            await axios.get('/user/getUser')
+            setTimeout(rendered, 1000)
+        }
+        catch(e: any)
+        {
+            const error = e.response.data
+            if(error.authRedirect)
+            {
+                navigate('/', {state: error.message})
+            }
+        }
+    }
 
     function resetTimerButton()
     {

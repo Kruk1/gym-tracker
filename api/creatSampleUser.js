@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 const hash = bcrypt.hashSync("321", salt);
 const user = {
-    login: 'dawid',
+    login: 'dawid2',
     password: hash,
-    isAdmin: true
+    isAdmin: false
 }
 
 User.create(user)

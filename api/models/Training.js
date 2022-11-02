@@ -52,7 +52,7 @@ const trainingSchema = mongoose.Schema({
         }
     },
     createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true}
-})
+}, { timestamps: true })
 
 const Training = mongoose.model('TrainingPlans', trainingSchema)
 
