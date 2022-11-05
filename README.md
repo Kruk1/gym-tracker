@@ -1,6 +1,7 @@
 # Gym tracker
 * [Description](#description)
 * [Technologies](#technologies)
+* [Features](#features)
 * [Demo](#demo)
 
 ## Description
