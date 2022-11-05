@@ -35,14 +35,14 @@ router.post('/CreateTraining', catchAsync(async (req, res) =>
 router.get('/GetTraining', catchAsync(async (req, res) =>
 {
     const training = await Training.find({createdBy: req.user.id}).sort({_id: -1})
-    res.json(training)
+    res.status(200).json(training)
 }))
 
 router.get('/GetTrainingDetails', catchAsync(async (req, res) =>
 {
     const {id} = req.query
     const training = await Training.findById(id)
-    res.json(training)
+    res.status(200).json(training)
 }))
 
 router.patch('/UpdateTraining', catchAsync(async (req, res) =>
@@ -74,7 +74,7 @@ router.delete('/DeleteTraining', catchAsync(async (req, res) =>
 {
     const {id} = req.query
     await Training.findByIdAndDelete(id)
-    res.send('Deleted')
+    res.status(200).send('Deleted')
 }))
 
 router.post('/CreateExercise', catchAsync(async (req, res) =>
@@ -92,7 +92,7 @@ router.post('/CreateExercise', catchAsync(async (req, res) =>
         }
     )
     await training.save()
-    res.send('Created!')
+    res.status(200).send('Created!')
 }))
 
 router.patch('/UpdateResults', catchAsync(async (req, res) =>
@@ -103,7 +103,7 @@ router.patch('/UpdateResults', catchAsync(async (req, res) =>
     exercise.results.push(req.body.number)
     exercise.length.push('')
     await training.save()
-    res.send('Created!')
+    res.status(200).send('Created!')
 }))
 
 router.delete('/DeleteExercise', catchAsync(async (req, res) =>
@@ -114,7 +114,30 @@ router.delete('/DeleteExercise', catchAsync(async (req, res) =>
     const newExercises = day.exercises.filter(prevExercise => prevExercise._id != exercise._id)
     day.exercises = newExercises
     await training.save()
-    res.send('Deleted!')
+    res.status(200).send('Deleted!')
+}))
+
+router.patch('/UpdateExercise', catchAsync(async (req, res) =>
+{
+    const training = await Training.findById(req.body.idTraining)
+    const day = training.days.find(day => day._id == req.body.idDay)
+    const exercise = day.exercises.find(exercise => exercise._id == req.body.idExercise)
+    exercise.name = req.body.name
+    exercise.units = req.body.units
+    await training.save()
+    res.status(200).send('Exercise has been updated!')
+}))
+
+router.delete('/DeleteResult', catchAsync(async (req, res) =>
+{
+    const training = await Training.findById(req.body.idTraining)
+    const day = training.days.find(day => day._id == req.body.idDay)
+    const exercise = day.exercises.find(exercise => exercise._id == req.body.idExercise)
+    const newResults = exercise.results.filter((exercise, index) => index != req.body.index)
+    exercise.results = newResults
+    exercise.length.pop()
+    await training.save()
+    res.status(200).send('Result has been updated!')
 }))
 
 module.exports = router

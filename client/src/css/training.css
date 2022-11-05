@@ -132,6 +132,7 @@
     flex-direction: column;
     align-items: center;
     width: 800px;
+    animation: fade-in .5s forwards;
 }
 
 .modal-exercise h4
@@ -185,7 +186,7 @@
     background-color: #434343;
 }
 
-#number
+#number, #name-exercise-input
 {
     background-color: #212121;
     border: 1px solid #101010;
@@ -242,7 +243,7 @@
     background-color: #434343;
 }
 
-.modal-add-exercise, .modal-exercise 
+.modal-add-exercise, .modal-exercise, .modal-exercise-update
 {
     position: fixed;
     top: 50%;
@@ -359,6 +360,112 @@
     background-color: #434343;
 }
 
+.input-update-name
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-update-name label 
+{
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+#name-exercise-input
+{
+    width: 250px;
+    margin: 0 5px;
+}
+
+.inputs-update-exercise
+{
+    display: flex;
+}
+
+.modal-exercise-update
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.results-update-container
+{
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #101010;
+    border-bottom: 1px solid #101010;
+}
+
+.result-update:first-child
+{
+    margin-top: 0;
+}
+
+.result-update 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+.results-update-container p 
+{
+    width: 292px;
+    font-weight: 500;
+    margin: 0 6px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.results-update-container button
+{
+    width: 70px;
+    background-color: #a81414;
+    border: 0;
+    color: white;
+    line-height: 25px;
+    border-radius: 5px;
+    transition: .2s;
+    padding: 0 6px;
+}
+
+.results-update-container button:hover
+{
+    background-color: #970303;
+    cursor: pointer;
+}
+
+.modal-exercise-update #update
+{
+    background-color: #212121;
+    border: 1px solid #101010;
+    color: white;
+    width: 75px;
+    line-height: 25px;
+    border-radius: 5px;
+    transition: .2s;
+    margin-top: 10px;
+}
+
+.modal-exercise-update #update:hover
+{
+    cursor: pointer;
+    background-color: #434343;
+}
+
+.modal-exercise-update form 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -444,6 +551,37 @@ input[type=number] {
     .select-exercise-input
     {
         width: 100px;
+    }
+
+    .input-update-name #name-exercise-input
+    {
+        width: 180px;
+        padding: 7px 10px;
+    }
+
+    .input-update-name .select-exercise-input
+    {
+        width: 60px;
+    }
+
+    .results-update-container
+    {
+        width: 250px;
+    }
+
+    .results-update-container p
+    {
+        width: 175px;
+    }
+
+    .results-update-container button
+    {
+        width: 60px;
+    }
+
+    .modal-exercise-update
+    {
+        padding: 14px;
     }
 }
 
