@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 5000
 const path = require('path')
 const dateNow = new Date().getTime()
 const nextDayInMilliseconds = 86400000
-const herokuAwake = require("heroku-awake")
 const deleteTraining = require('./controllers/deleteTraining')
 
 function getNextMidnightTime() {
@@ -57,6 +56,5 @@ app.listen(PORT, () =>
       deleteTraining()
       setInterval(deleteTraining, nextDayInMilliseconds)
     }, getNextMidnightTime() - dateNow)
-    herokuAwake('https://gym-tracker-exercise.herokuapp.com')
     console.log('Server started on port 5000 ')
   })
