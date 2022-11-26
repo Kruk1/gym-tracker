@@ -1,35 +1,18 @@
 const express = require('express')
 const app = express()
 const cookieParser = require('cookie-parser')
-const session = require('express-session')
 const flash = require('connect-flash')
-const sessionOptions = {secret: '1234567890', resave: false, saveUninitialized: true}
 const cors = require('cors')
 const training = require('./router/training')
 const auth = require('./router/auth')
 const user = require('./router/user')
 const PORT = process.env.PORT || 5000
 const path = require('path')
-const dateNow = new Date().getTime()
-const nextDayInMilliseconds = 86400000
-const deleteTraining = require('./controllers/deleteTraining')
-
-function getNextMidnightTime() {
-  let midnight = new Date()
-  midnight.setHours(24);
-  midnight.setMinutes(0);
-  midnight.setSeconds(0);
-  midnight.setMilliseconds(0);
-
-  return midnight.getTime()
-}
-
 
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
-app.use(session(sessionOptions))
 app.use(flash())
 
 app.use('/training', training)
@@ -51,10 +34,5 @@ app.use((err, req, res, next) =>
 
 app.listen(PORT, () => 
   {
-    setTimeout(() => 
-    {
-      deleteTraining()
-      setInterval(deleteTraining, nextDayInMilliseconds)
-    }, getNextMidnightTime() - dateNow)
     console.log('Server started on port 5000 ')
   })

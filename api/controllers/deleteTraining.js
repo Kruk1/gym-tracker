@@ -1,15 +1,14 @@
 const Training = require('../models/Training')
 
-async function deleteTraining()
+async function deleteTraining(req, res, next)
 {
-    const trainings = await Training.find({ }).populate('createdBy')
+    if(req.user.isAdmin) return next()
+    const trainings = await Training.find({ createdBy: req.user.id})
     for(let training of trainings)
     {
-        if(!training.createdBy.isAdmin)
-        {
-            await Training.findByIdAndDelete(training._id)
-        }
+        await Training.findByIdAndDelete(training._id)
     }
+    next()
 }
 
 module.exports = deleteTraining

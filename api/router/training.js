@@ -2,6 +2,7 @@ const express = require('express')
 const verifyToken = require('../controllers/verifyToken')
 const Training = require('../models/Training')
 const router = express.Router()
+const deleteTraining = require('../controllers/deleteTraining')
 
 const catchAsync = (fn) =>
 {
@@ -13,7 +14,7 @@ const catchAsync = (fn) =>
 
 router.use(verifyToken)
 
-router.post('/CreateTraining', catchAsync(async (req, res) =>
+router.post('/CreateTraining', deleteTraining, catchAsync(async (req, res) =>
 {
     let daysPrepare = []
     for(let i = 1; i <= req.body.days; i++)

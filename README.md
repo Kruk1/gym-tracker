@@ -31,5 +31,5 @@ Login guest info:<br>
 - Password: **12345**
 
 ***Disclaimer:<br>***
-*Every training created in guest account, it is deleting each day at midnight.<br>*
+*In the guest account, you can create and use one training. If more than 1 user login guest account, he can remove your training, while testing<br>*
 ### Website: [Gym Tracker](https://gym-tracker-production.up.railway.app)
