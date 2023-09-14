@@ -20,7 +20,8 @@
     "react-stay-awake": "^0.1.0",
     "stayawake.js": "^1.0.2",
     "use-no-sleep": "^0.3.1",
-    "use-stay-awake": "^0.1.7"
+    "use-stay-awake": "^0.1.7",
+    "react-device-detect": "^2.2.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -33,7 +34,6 @@
   },
   "devDependencies": {
     "@types/nosleep.js": "^0.10.0",
-    "@types/react-native-keep-awake": "^2.0.3",
-    "react-device-detect": "^2.2.2"
+    "@types/react-native-keep-awake": "^2.0.3"
   }
 }
