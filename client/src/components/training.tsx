@@ -69,7 +69,7 @@ function Training() {
     {
         try
         {
-            await axios.get('/user/getUser')
+            await axios.get('http://localhost:5000/user/getUser')
             setTimeout(rendered, 1000)
         }
         catch(e: any)
@@ -86,7 +86,7 @@ function Training() {
     {
         try
         {
-            const res = await axios.get(`/training/GetTrainingDetails?id=${id}`)
+            const res = await axios.get(`http://localhost:5000/training/GetTrainingDetails?id=${id}`)
             if(!res.data)
                 navigate('/user/plans')
             setTraining(res.data)
@@ -121,7 +121,7 @@ function Training() {
     {
         try
         {
-            await axios.delete(`/training/DeleteTraining?id=${id}`)
+            await axios.delete(`http://localhost:5000/training/DeleteTraining?id=${id}`)
             navigate('/user/plans', {state: 'Training deleted!'})
         }
         catch(e: any)
@@ -228,7 +228,7 @@ function Training() {
         try
         {
             event.preventDefault()
-            await axios.patch(`/training/UpdateTraining`,
+            await axios.patch(`http://localhost:5000/training/UpdateTraining`,
             {
                 name: trainingUpdateInfo.name,
                 description: trainingUpdateInfo.description,

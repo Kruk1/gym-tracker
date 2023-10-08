@@ -28,6 +28,8 @@ router.post('/login', catchAsync(async (req, res) =>
 
     const {password, isAdmin, ...otherParameters} = user._doc
 
+    console.log(token)
+
     res.cookie('access_token', token, { httpOnly: true }).status(200).send('Success')
 }))
 

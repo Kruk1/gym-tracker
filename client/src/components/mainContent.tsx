@@ -102,7 +102,7 @@ function MainContent() {
         try
         {
             event.preventDefault();
-            await axios.post(`/training/CreateTraining`, {
+            await axios.post(`http://localhost:5000/training/CreateTraining`, {
                 name: trainingCreateInfo.name,
                 days: trainingCreateInfo.days,
                 description: trainingCreateInfo.description
@@ -137,7 +137,7 @@ function MainContent() {
     {
         try
         {
-            const res = await axios.get('/user/getUser')
+            const res = await axios.get('http://localhost:5000/user/getUser')
             const{login, id} = res.data
             setAuthInfo({login: login, id: id})
             getTrainingData()
@@ -155,7 +155,7 @@ function MainContent() {
 
     async function getTrainingData()
     {
-        const res = await axios.get(`/training/GetTraining`)
+        const res = await axios.get(`http://localhost:5000/training/GetTraining`)
         setTrainingData(res.data)
     }
 

@@ -108,7 +108,7 @@ function Exercise(props: any) {
         event.preventDefault()
         if(number)
         {
-            await axios.patch('/training/UpdateResults', {number: number, idExercise: idExercise, idTraining: id, idDay: props.props.idDay})
+            await axios.patch('http://localhost:5000/training/UpdateResults', {number: number, idExercise: idExercise, idTraining: id, idDay: props.props.idDay})
             props.props.setIsRendering(false)
             props.props.getTrainingInfo()
         }
@@ -121,7 +121,7 @@ function Exercise(props: any) {
 
     async function deleteExercise() 
     {
-        await axios.delete('/training/DeleteExercise', {data: {idExercise: idExercise, idTraining: id, idDay: props.props.idDay}})
+        await axios.delete('http://localhost:5000/training/DeleteExercise', {data: {idExercise: idExercise, idTraining: id, idDay: props.props.idDay}})
         props.props.setIsRendering(false)
         props.props.setResponse('Exercise deleted!')
         props.props.getTrainingInfo()
@@ -129,7 +129,7 @@ function Exercise(props: any) {
 
     async function deleteResult(index: number) 
     {
-        await axios.delete('/training/DeleteResult', {data: {idExercise: idExercise, idTraining: id, idDay: props.props.idDay, index: index}})
+        await axios.delete('http://localhost:5000/training/DeleteResult', {data: {idExercise: idExercise, idTraining: id, idDay: props.props.idDay, index: index}})
     }
 
     function calcProgress()
@@ -140,7 +140,7 @@ function Exercise(props: any) {
 
     async function handleUpdateSubmit()
     {
-        await axios.patch('/training/UpdateExercise', {name: updateExercise.nameExercise, units: updateExercise.unitsUpdate, idExercise: props.props._id, idDay: props.props.idDay, idTraining: id})
+        await axios.patch('http://localhost:5000/training/UpdateExercise', {name: updateExercise.nameExercise, units: updateExercise.unitsUpdate, idExercise: props.props._id, idDay: props.props.idDay, idTraining: id})
         props.props.setIsRendering(false)
         props.props.setResponse('Exercise updated!')
         props.props.getTrainingInfo()
