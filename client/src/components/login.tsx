@@ -46,7 +46,7 @@ function LoginForm() {
                 setResponse('Password is required!')
                 return
             }
-            await axios.post(`/auth/login`, {
+            await axios.post(`http://localhost:5000/auth/login`, {
                 login: login.login.trim(),
                 password: login.password
             })
